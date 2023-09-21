@@ -1,25 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect} from 'react';
 import './App.css';
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {Product} from "./components/Product";
+import {LoginForm} from "./pages/Login";
+import {Dashboard} from "./pages/Dashboard";
+import API from "./api";
+import {TitleProvider} from "./context/titleContext";
+
 
 function App() {
+    const [title, setTitle] = React.useState('');
+
+    const getTitle = () => {
+        API.get('/stores').then(
+            res => {
+                setTitle(res.data[0].data.name);
+            }
+        );
+    }
+    useEffect(() => {
+        getTitle()
+    }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <TitleProvider value={title}>
+          <BrowserRouter>
+              <Routes>
+                  <Route path="/login" element={<LoginForm/>}/>
+                  <Route path="/dashboard" element={<Dashboard/>}/>
+                  <Route path="/products" element={<Product/>}/>
+                  <Route path={'*'} element={<LoginForm/>}></Route>
+              </Routes>
+          </BrowserRouter>
+      </TitleProvider>
   );
 }
 
