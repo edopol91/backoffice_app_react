@@ -16,7 +16,7 @@ export const LoginForm = () => {
         setIsDisabled(true);
         if (username && password) {
             localStorage.setItem('auth', 'true')
-            navigate('/dashboard')
+            navigate('/dashboard/products')
         }
     }
 
