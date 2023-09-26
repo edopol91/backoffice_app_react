@@ -42,6 +42,7 @@ nav {
 }
 
 .button-container {
+  padding: 0 1.5rem;
   cursor: pointer;
 }
 
@@ -76,31 +77,47 @@ form > div {
   margin-bottom: 20px;
 }
 
+.change-view {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: flex-end;
+
+  .icon {
+    padding: 1rem;
+    cursor: pointer;
+  }
+
+  .inactive {
+    opacity: 0.5;
+  }
+
+  .active {
+    opacity: 1;
+  }
+}
+
+.products {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+
+  .card {
+    max-width: 400px;
+  }
+
+  &.columns {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    .card {
+      max-width: 100%;
+    }
+  }
+}
+
 .lds-container {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.lds-dual-ring {
-  display: inline-block;
-  width: 80px;
-  height: 80px;
-}
-.lds-dual-ring:after {
-  content: " ";
-  display: block;
-  width: 64px;
-  height: 64px;
-  margin: 8px;
-  border-radius: 50%;
-  border: 6px solid #cef;
-  animation: lds-dual-ring 1.2s linear infinite;
-}
-@keyframes lds-dual-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  height: 100%;
 }
