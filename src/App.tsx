@@ -5,6 +5,8 @@ import {LoginForm} from "./pages/Login";
 import {Dashboard} from "./pages/Dashboard";
 import API from "./api";
 import {TitleProvider} from "./context/titleContext";
+import {Chart} from "./components/Chart";
+import {Products} from "./components/Products";
 
 
 function App() {
@@ -25,8 +27,11 @@ function App() {
       <TitleProvider value={title}>
           <BrowserRouter>
               <Routes>
-                  <Route path="/login" element={<LoginForm/>}/>
-                  <Route path="/dashboard/*" element={<Dashboard/>}/>
+                  <Route path="login" index element={<LoginForm/>}/>
+                  <Route path="dashboard/*" element={<Dashboard/>}>
+                      <Route path="products" element={<Products/>}/>
+                      <Route path="chart" element={<Chart/>}/>
+                  </Route>
                   <Route path={'*'} element={<LoginForm/>}></Route>
               </Routes>
           </BrowserRouter>

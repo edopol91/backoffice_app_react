@@ -1,3 +1,3 @@
 export function Chart() {
-    return <div></div>
+    return <div>CHART</div>
 }
