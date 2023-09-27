@@ -2,7 +2,7 @@ import React, {useMemo, useState} from "react";
 import API from "../api";
 import Spinner from "./Spinner"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBars, faTableCells} from "@fortawesome/free-solid-svg-icons";
+import {faBars, faTableCells, faTrash} from "@fortawesome/free-solid-svg-icons";
 
 
 export function Products() {
@@ -25,11 +25,14 @@ export function Products() {
 
     function renderProduct(p) {
         return (
-            <div key={p.id} className="card">
-                <h3>{p.data.name}</h3>
-                <p>${p.data.description}</p>
-                <p>${p.data.price}</p>
-                <p>${p.data.employee}</p>
+            <div key={p.id} className="card p-4">
+                <h3>{p.data.title}</h3>
+                <div className={'card-body'}>
+                    <p>{p.data.description}</p>
+                    <p>{p.data.price}€</p>
+                    <p>{p.data.employee}</p>
+                </div>
+                <FontAwesomeIcon size={"lg"} icon={faTrash} className={'delete'}></FontAwesomeIcon>
             </div>
         );
     }

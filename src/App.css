@@ -103,13 +103,20 @@ form > div {
   gap: 1.5rem;
 
   .card {
-    max-width: 400px;
+    max-width: 32%;
+    .delete {
+      color: red;
+      cursor: pointer;
+      display: flex;
+      align-self: flex-end;
+    }
   }
 
   &.columns {
     flex-direction: column;
     flex-wrap: nowrap;
     .card {
+      padding: 0 12px;
       max-width: 100%;
     }
   }
