@@ -1,0 +1,56 @@
+.container {
+    .rounded-circle {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .change-view {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        justify-content: flex-end;
+
+        .icon {
+            padding: 1rem;
+            cursor: pointer;
+        }
+
+        .inactive {
+            opacity: 0.5;
+        }
+
+        .active {
+            opacity: 1;
+        }
+    }
+
+    .products {
+        display: flex;
+        flex-direction: row;
+        gap: 1.5rem;
+
+        .card {
+            max-width: 32%;
+
+            .delete {
+                color: red;
+                cursor: pointer;
+                display: flex;
+                align-self: flex-end;
+            }
+        }
+
+        &.columns {
+            flex-direction: column;
+            flex-wrap: nowrap;
+
+            .card {
+                padding: 0 12px;
+                max-width: 100%;
+            }
+        }
+    }
+}
