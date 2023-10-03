@@ -1,0 +1,19 @@
+.form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .form-field {
+        width: 48%;
+
+        .label {
+            display: flex;
+            margin-bottom: 0.5rem;
+        }
+
+        .input {
+            width: 100%;
+        }
+    }
+}

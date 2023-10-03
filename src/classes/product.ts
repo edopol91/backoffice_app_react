@@ -8,12 +8,13 @@ export class Product {
 
 export class ProductData {
    constructor(
-       public reviews = ['Test'],
-       public price = 5000,
-       public description = 'Test',
-       public title = 'Test',
-       public category = 'Test',
-       public employee = 'Test'
+       public category = '',
+       public description = '',
+       public title = '',
+       public employee = '',
+       public price = 0,
+       public reviews = ['']
+
    ) {
    }
 }

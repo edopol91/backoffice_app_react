@@ -3,26 +3,26 @@ import API from "../api";
 import Spinner from "./Spinner";
 import './products.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBars, faPlus, faTableCells, faTrash} from "@fortawesome/free-solid-svg-icons";
-import {Popup} from "./Popup";
+import {faBars, faPlus, faTableCells} from "@fortawesome/free-solid-svg-icons";
 import {Product, ProductData} from "../classes/product";
-import {ConfirmButton} from "../classes/confirm-button";
+import {ProductComponent} from "./ProductComponent";
+import {AddProductModal} from "./AddProductModal";
 
 export function Products() {
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const [toggleView, setToggleView] = useState('row');
+    const [showAddPopup, setShowAddPopup] = useState(false)
 
-    const [show, setShow] = useState(false)
-
-
-    function showModal() {
-        setShow(true);
+    function showAddPopupModal() {
+        setShowAddPopup(true);
     }
 
-    function hideModal() {
-        setShow(false);
+    function hideAddPopupModal() {
+        setShowAddPopup(false)
     }
+
+    const formValues: ProductData = new ProductData();
 
     const getProducts = () => {
         setLoading(true);
@@ -38,47 +38,7 @@ export function Products() {
         getProducts()
     }, []);
 
-    function deleteProduct(id: string): void {
-        API.delete(`/stores/ijpxNJLM732vm8AeajMR/products/${id}`).then(
-            () => {
-               hideModal();
-               getProducts();
-            }
-        )
-    }
 
-    function addProduct() {
-        API.post(`/stores/ijpxNJLM732vm8AeajMR/products`, new ProductData()).then(
-            res => {
-                getProducts();
-            }
-        )
-    }
-
-    function getConfirmButtonFn() {
-        return new ConfirmButton('btn btn-danger', 'Delete')
-    }
-
-    function renderProduct(p: Product) {
-        return (
-            <div key={p.id} className="card p-4">
-                <h3>{p.data.title}</h3>
-                <div className={'card-body'}>
-                    <p>{p.data.description}</p>
-                    <p>{p.data.price}€</p>
-                    <p>{p.data.employee}</p>
-                </div>
-                <FontAwesomeIcon  onClick={showModal} size={"lg"} icon={faTrash}
-                                 className={'delete'}></FontAwesomeIcon>
-                <Popup handleClick={() => deleteProduct(p.id)} confirmButton={getConfirmButtonFn()} show={show} handleClose={hideModal}>
-                    <div>
-                        <h2>Remove {p.data.title}</h2>
-                        <p>Are you sure you want to remove {p.data.title} ?</p>
-                    </div>
-                </Popup>
-            </div>
-        );
-    }
 
     if (loading) return <Spinner/>;
 
@@ -86,20 +46,24 @@ export function Products() {
         <>
             <div className="container">
                 <div className="change-view">
-                    <div className={toggleView === 'row' ? 'active' : 'inactive'}>
-                        <FontAwesomeIcon size={"lg"} onClick={() => setToggleView('row')}
-                                         className={'icon'} icon={faBars}/>
-                    </div>
                     <div className={toggleView === 'columns' ? 'active' : 'inactive'}>
                         <FontAwesomeIcon size={"lg"} onClick={() => setToggleView('columns')}
+                                         className={'icon'} icon={faBars}/>
+                    </div>
+                    <div className={toggleView === 'row' ? 'active' : 'inactive'}>
+                        <FontAwesomeIcon size={"lg"} onClick={() => setToggleView('row')}
                                          className={'icon'}
                                          icon={faTableCells}/>
                     </div>
                 </div>
-                <section className={'products ' + toggleView}>{products.map(renderProduct)}</section>
-                <button className={'btn btn-primary rounded-circle'} onClick={addProduct}>
+                <section className={'products ' + toggleView}>
+                    {products.map((p) => <ProductComponent key={p.id} onDeleteProduct={getProducts} product={p}/>)}
+                </section>
+                <button className={'btn btn-primary rounded-circle'} onClick={showAddPopupModal}>
                     <FontAwesomeIcon icon={faPlus} size={"lg"}></FontAwesomeIcon>
                 </button>
+                <AddProductModal showAddModal={showAddPopup} hideAddModal={hideAddPopupModal}
+                                 submitProduct={getProducts} formValues={formValues}/>
             </div>
         </>
     );
