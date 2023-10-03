@@ -48,6 +48,13 @@
                 max-width: 90%;
             }
 
+            .card-body {
+                .description {
+                    max-height: 10rem;
+                    overflow: auto;
+                }
+            }
+
             .delete {
                 color: red;
                 cursor: pointer;

@@ -29,21 +29,20 @@ export function ProductComponent({product, onDeleteProduct}) {
         <div key={product.id} className="card p-4">
             <h3>{product.data.title}</h3>
             <div className={'card-body'}>
-                <label htmlFor={'description'}>
+                <label>
                     Description:
                 </label>
-                <p id={'description'}>{product.data.description}</p>
+                <p className={'description'}>{product.data.description}</p>
 
-                <label htmlFor={'price'}>
+                <label>
                     Price:
                 </label>
-                <p id={'price'}>{product.data.price}€</p>
+                <p>{product.data.price}€</p>
 
-                <label htmlFor={'employee'}>
+                <label>
                     Employee:
                 </label>
-                <p id={'employee'}>{product.data.employee}</p>
-
+                <p>{product.data.employee}</p>
             </div>
             <FontAwesomeIcon onClick={showDeletePopupModal} size={"lg"} icon={faTrash}
                              className={'delete'}></FontAwesomeIcon>
