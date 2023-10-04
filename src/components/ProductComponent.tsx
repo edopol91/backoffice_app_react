@@ -1,7 +1,6 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {Popup} from "./Popup";
-import {ConfirmButton} from "../classes/confirm-button";
 import React, {useState} from "react";
 import API from "../api";
 
@@ -46,12 +45,19 @@ export function ProductComponent({product, onDeleteProduct}) {
             </div>
             <FontAwesomeIcon onClick={showDeletePopupModal} size={"lg"} icon={faTrash}
                              className={'delete'}></FontAwesomeIcon>
-            <Popup handleClick={() => deleteProduct(product.id)}
-                   confirmButton={new ConfirmButton('btn btn-danger', 'Delete')}
-                   show={showDeletePopup} handleClose={hideDeletePopup}>
+            <Popup
+
+                show={showDeletePopup}>
                 <div>
                     <h2>Remove {product.data.title}</h2>
                     <p>Are you sure you want to remove {product.data.title} ?</p>
+                </div>
+                <div className={'button-container'}>
+                    <button className={'btn btn-secondary'} type="button" onClick={hideDeletePopup}>
+                        Close
+                    </button>
+                    <button className={'btn btn-danger btn-rounded'} onClick={() => deleteProduct(product.id)}>Delete
+                    </button>
                 </div>
             </Popup>
         </div>

@@ -19,6 +19,9 @@
     flex-direction: column;
     overflow: hidden;
     transform: translate(-50%,-50%);
+    @media only screen and (max-width: 770px) {
+        width: 90%;
+    }
 }
 
 .display-block {
@@ -27,9 +30,4 @@
 
 .display-none {
     display: none;
-}
-.button-container {
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-end;
 }

@@ -1,74 +1,99 @@
 import React, {useState} from "react";
 import './form.css'
 import API from "../api";
-import {ConfirmButton} from "../classes/confirm-button";
 import {Popup} from "./Popup";
+import {Formik, Form, Field} from 'formik';
+import * as yup from 'yup'
 import {ProductData} from "../classes/product";
+import Spinner from "./Spinner";
 
-export function AddProductModal({formValues, showAddModal, hideAddModal, submitProduct}) {
-    const [category, setCategory] = useState(formValues.category);
-    const [description, setDescription] = useState(formValues.description);
-    const [title, setTitle] = useState(formValues.title);
-    const [employee, setEmployees] = useState(formValues.employee);
-    const [price, setPrices] = useState(formValues.price);
-    formValues = {category, description, title, employee, price, reviews: []};
+export function AddProductModal({showAddModal, hideAddModal, submitProduct}) {
+    const [loading, setLoading] = useState(false);
 
     function addProduct(values: ProductData) {
+        setLoading(true)
         API.post(`/stores/ijpxNJLM732vm8AeajMR/products`, values).then(
             () => {
-                hideAddModal();
+                hideModal();
                 submitProduct();
+                setLoading(false);
             }
         )
+
+    }
+
+    const productSchema = yup.object().shape({
+        category: yup.string().required(),
+        description: yup.string(),
+        title: yup.string().required(),
+        employee: yup.string().required(),
+        price: yup.number().required(),
+    })
+
+    function hideModal() {
+        hideAddModal();
     }
 
     return (
-        <Popup handleClick={() => addProduct(formValues)}
-               confirmButton={new ConfirmButton('btn btn-primary', 'Add')}
-               show={showAddModal}
-               handleClose={hideAddModal}>
+        <Popup show={showAddModal}>
             <div>
                 <h1>
                     Add product
                 </h1>
-                <form className={'form'}>
-                    <div className={'form-field'}>
-                        <label className={'label'}>
-                            Category
-                        </label>
-
-                        <input className={'input'} onChange={(e) => setCategory(e.target.value)} value={category}/>
-                    </div>
-                    <div className={'form-field'}>
-                        <label className={'label'}>
-                            Title
-                        </label>
-                        <input className={'input'} onChange={(e) => setTitle(e.target.value)} value={title}/>
-                    </div>
-                    <div className={'form-field'}>
-                        <label className={'label'}>
-                            Description
-                        </label>
-
-                        <input className={'input'} onChange={(e) => setDescription(e.target.value)}
-                               value={description}/>
-                    </div>
-                    <div className={'form-field'}>
-                        <label className={'label'}>
-                            Price
-                        </label>
-
-                        <input type={'number'} className={'input'} onChange={(e) => setPrices(Number(e.target.value))}
-                               value={price}/>
-                    </div>
-                    <div className={'form-field'}>
-                        <label className={'label'}>
-                            Employee
-                        </label>
-                        <input className={'input'} onChange={(e) => setEmployees(e.target.value)} value={employee}/>
-
-                    </div>
-                </form>
+                <Formik
+                    initialValues={{
+                        category: '',
+                        description: '',
+                        title: '',
+                        employee: '',
+                        price: 0,
+                    }}
+                    validationSchema={productSchema}
+                    onSubmit={values => {
+                        addProduct(values);
+                    }}
+                >
+                    {({errors, touched, resetForm}) => (
+                        <Form className={'form'}>
+                            <div className={'form-container'}>
+                                <label>Category</label>
+                                <Field name={'category'} className={'form-field'}/>
+                                {errors.category && touched.category ? (
+                                    <div>{errors.category}</div>
+                                ) : null}
+                            </div>
+                            <div className={'form-container'}>
+                                <label>Title</label>
+                                <Field name={'title'} className={'form-field'}/>
+                            </div>
+                            <div className={'form-container'}>
+                                <label>Description</label>
+                                <Field name={'description'} className={'form-field'}/>
+                            </div>
+                            <div className={'form-container'}>
+                                <label>Price</label>
+                                <Field name={'price'} className={'form-field'}/>
+                            </div>
+                            <div className={'form-container'}>
+                                <label>Employee</label>
+                                <Field name={'employee'} className={'form-field'}/>
+                            </div>
+                            <div className={'button-container'}>
+                                <button className={'btn btn-secondary'} type={"button"} onClick={() => {
+                                    hideAddModal();
+                                    resetForm();
+                                }}
+                                >
+                                    Close
+                                </button>
+                                <button disabled={loading} type={'submit'}
+                                        className={'btn btn-primary btn-rounded'}>
+                                    {loading ? <Spinner/> : 'Add'}
+                                </button>
+                            </div>
+                        </Form>
+                    )}
+                </Formik>
             </div>
         </Popup>
     )

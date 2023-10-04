@@ -13,8 +13,7 @@ export class ProductData {
        public title = '',
        public employee = '',
        public price = 0,
-       public reviews = ['']
-
+       public reviews?
    ) {
    }
 }

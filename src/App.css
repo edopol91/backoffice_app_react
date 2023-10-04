@@ -73,8 +73,13 @@ a.active {
   text-decoration: underline;
 }
 
-form > div {
-  margin-bottom: 20px;
+.button-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
 }
 
 .lds-container {

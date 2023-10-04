@@ -4,7 +4,7 @@ import Spinner from "./Spinner";
 import './products.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars, faPlus, faTableCells} from "@fortawesome/free-solid-svg-icons";
-import {Product, ProductData} from "../classes/product";
+import {Product} from "../classes/product";
 import {ProductComponent} from "./ProductComponent";
 import {AddProductModal} from "./AddProductModal";
 
@@ -21,8 +21,6 @@ export function Products() {
     function hideAddPopupModal() {
         setShowAddPopup(false)
     }
-
-    const formValues: ProductData = new ProductData();
 
     const getProducts = () => {
         setLoading(true);
@@ -63,7 +61,7 @@ export function Products() {
                     <FontAwesomeIcon icon={faPlus} size={"lg"}></FontAwesomeIcon>
                 </button>
                 <AddProductModal showAddModal={showAddPopup} hideAddModal={hideAddPopupModal}
-                                 submitProduct={getProducts} formValues={formValues}/>
+                                 submitProduct={getProducts}/>
             </div>
         </>
     );
