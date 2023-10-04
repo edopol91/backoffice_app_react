@@ -6,6 +6,7 @@ import API from "../api";
 
 export function ProductComponent({product, onDeleteProduct}) {
     const [showDeletePopup, setShowDeletePopup] = useState(false)
+    const [showReviewPopup, setShowReviewPopup] = useState(false)
 
     function showDeletePopupModal() {
         setShowDeletePopup(true);
@@ -14,6 +15,15 @@ export function ProductComponent({product, onDeleteProduct}) {
     function hideDeletePopup() {
         setShowDeletePopup(false);
     }
+
+    function setShowReviewPopupModal() {
+        setShowReviewPopup(true);
+    }
+
+    function hideReviewPopup() {
+        setShowReviewPopup(false);
+    }
+
 
     function deleteProduct(id: string): void {
         API.delete(`/stores/ijpxNJLM732vm8AeajMR/products/${id}`).then(
@@ -43,8 +53,11 @@ export function ProductComponent({product, onDeleteProduct}) {
                 </label>
                 <p>{product.data.employee}</p>
             </div>
+            <div className={'footer'}>
+                <p className={'show-review'} onClick={() => setShowReviewPopup}>Show reviews</p>
             <FontAwesomeIcon onClick={showDeletePopupModal} size={"lg"} icon={faTrash}
                              className={'delete'}></FontAwesomeIcon>
+            </div>
             <Popup
 
                 show={showDeletePopup}>

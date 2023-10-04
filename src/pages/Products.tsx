@@ -1,13 +1,13 @@
 import React, {useMemo, useState} from "react";
 import API from "../api";
-import Spinner from "./Spinner";
+import Spinner from "../components/Spinner";
 import './products.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars, faPlus, faTableCells} from "@fortawesome/free-solid-svg-icons";
 import {Product} from "../classes/product";
-import {ProductComponent} from "./ProductComponent";
-import {AddProductModal} from "./AddProductModal";
-import {Paginator} from "./Paginator";
+import {ProductComponent} from "../components/ProductComponent";
+import {AddProductModal} from "../components/AddProductModal";
+import {Paginator} from "../components/Paginator";
 
 export function Products() {
     const [products, setProducts] = useState<Product[]>([]);

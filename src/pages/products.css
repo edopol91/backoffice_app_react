@@ -56,6 +56,17 @@
                 }
             }
 
+            .footer {
+                display: flex;
+                justify-content: space-between;
+                .show-review {
+                    color: #5252FFFF;
+                    text-decoration: underline;
+                    cursor: pointer;
+                    margin-bottom: 0
+                }
+            }
+
             .delete {
                 color: red;
                 cursor: pointer;

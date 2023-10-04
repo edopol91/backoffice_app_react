@@ -6,7 +6,7 @@ import {Dashboard} from "./pages/Dashboard";
 import API from "./api";
 import {TitleProvider} from "./context/titleContext";
 import {Chart} from "./components/Chart";
-import {Products} from "./components/Products";
+import {Products} from "./pages/Products";
 
 
 function App() {
