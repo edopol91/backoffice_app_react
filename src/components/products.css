@@ -41,6 +41,7 @@
 
         .card {
             max-width: 32%;
+            min-height: 460px;
             @media only screen and (min-width: 770px) and (max-width: 1400px) {
                 max-width: 48%;
             }
@@ -68,6 +69,7 @@
             flex-wrap: nowrap;
 
             .card {
+                min-height: unset;
                 padding: 0 12px;
                 max-width: 100%;
             }

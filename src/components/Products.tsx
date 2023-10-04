@@ -7,12 +7,36 @@ import {faBars, faPlus, faTableCells} from "@fortawesome/free-solid-svg-icons";
 import {Product} from "../classes/product";
 import {ProductComponent} from "./ProductComponent";
 import {AddProductModal} from "./AddProductModal";
+import {Paginator} from "./Paginator";
 
 export function Products() {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const [toggleView, setToggleView] = useState('row');
     const [showAddPopup, setShowAddPopup] = useState(false)
+    const [currentPage, setCurrentPage] = useState(1);
+    const [productsPerPage] = useState(6);
+
+    const indexOfLastPost = currentPage * productsPerPage;
+    const indexOfFirstPost = indexOfLastPost - productsPerPage;
+    const currentProducts = products.slice(indexOfFirstPost, indexOfLastPost);
+
+    const paginate = (pageNumber: number) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const previousPage = () => {
+        if (currentPage !== 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    const nextPage = () => {
+        if (currentPage !== Math.ceil(products.length / productsPerPage)) {
+            setCurrentPage(currentPage + 1);
+        }
+    }
+
 
     function showAddPopupModal() {
         setShowAddPopup(true);
@@ -37,7 +61,6 @@ export function Products() {
     }, []);
 
 
-
     if (loading) return <Spinner/>;
 
     return (
@@ -55,7 +78,17 @@ export function Products() {
                     </div>
                 </div>
                 <section className={'products ' + toggleView}>
-                    {products.map((p) => <ProductComponent key={p.id} onDeleteProduct={getProducts} product={p}/>)}
+                    {currentProducts.map((p) => <ProductComponent key={p.id} onDeleteProduct={getProducts}
+                                                                  product={p}/>)}
+                    <Paginator
+                        itemPerPage={productsPerPage}
+                        totalItems={products.length}
+                        currentPage={currentPage}
+                        paginate={paginate}
+                        nextPage={nextPage}
+                        previousPage={previousPage}
+                    />
+
                 </section>
                 <button className={'btn btn-primary rounded-circle'} onClick={showAddPopupModal}>
                     <FontAwesomeIcon icon={faPlus} size={"lg"}></FontAwesomeIcon>
@@ -66,3 +99,4 @@ export function Products() {
         </>
     );
 }
+
