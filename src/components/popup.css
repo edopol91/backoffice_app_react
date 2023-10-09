@@ -31,3 +31,20 @@
 .display-none {
     display: none;
 }
+
+.review-container {
+    .review {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid;
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+        margin: 1rem 0;
+    }
+}
+
+.add-new-review {
+    display: flex;
+    flex-direction: column;
+}

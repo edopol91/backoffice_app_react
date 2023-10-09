@@ -10,4 +10,4 @@ export function Popup({ show, children}) {
             </section>
         </div>
     );
-};
+}

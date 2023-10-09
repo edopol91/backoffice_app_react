@@ -44,10 +44,14 @@ nav {
   padding: 0 2rem;
   width: 100%;
 }
-
-.button-container {
-  padding: 0 1.5rem;
-  cursor: pointer;
+.modal-main {
+  .button-container {
+    padding: 0 1.5rem;
+    cursor: pointer;
+    align-self: flex-end;
+    display: flex;
+    gap: 1rem;
+  }
 }
 
 footer {
