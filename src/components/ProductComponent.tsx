@@ -4,9 +4,9 @@ import {Popup} from "./Popup";
 import React, {useState} from "react";
 import API from "../api";
 import {ReviewModal} from "./ReviewModal";
-import {ProductData} from "../classes/product";
+import {Product} from "../classes/product";
 
-export function ProductComponent({product, onDeleteProduct}) {
+export function ProductComponent({product, onDeleteProduct, onAddReview}) {
     const [showDeletePopup, setShowDeletePopup] = useState(false)
     const [showReviewPopup, setShowReviewPopup] = useState(false)
     const [newReview, setNewReview] = useState('')
@@ -28,12 +28,13 @@ export function ProductComponent({product, onDeleteProduct}) {
         setShowReviewPopup(false);
     }
 
-    function addReview(product: ProductData, newReview: string) {
+    function addReview(product: Product, newReview: string) {
         if (newReview !== '') {
-            product.reviews ? product.reviews.push(newReview) : product.reviews = [newReview];
+            product.data.reviews ? product.data.reviews.push(newReview) : product.data.reviews = [newReview];
+            product.data.price = Number(product.data.price);
             API.post(`/stores/ijpxNJLM732vm8AeajMR/products`, product).then(
                 () => {
-                    onDeleteProduct(true)
+                    onAddReview(true)
                 }
             )
         }
@@ -100,7 +101,7 @@ export function ProductComponent({product, onDeleteProduct}) {
                     <button className={'btn btn-secondary'} type="button" onClick={hideReviewPopup}>
                         Close
                     </button>
-                    <button className={'btn btn-primary btn-rounded'} onClick={() => addReview(product.data, newReview)}>Add
+                    <button className={'btn btn-primary btn-rounded'} onClick={() => addReview(product, newReview)}>Add
                     </button>
                 </div>
             </Popup>

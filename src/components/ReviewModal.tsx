@@ -21,9 +21,9 @@ export function ReviewModal({product, newReview}) {
     function removeReview(review: string) {
         const index = product.data.reviews.findIndex(value => value === review);
         product.data.reviews.splice(index, 1)
-        API.post(`/stores/ijpxNJLM732vm8AeajMR/products`, product.data).then(
+        API.post(`/stores/ijpxNJLM732vm8AeajMR/products`, product).then(
             () => {
-
+                hideDeletePopup();
             }
         )
     }

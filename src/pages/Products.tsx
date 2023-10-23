@@ -8,10 +8,11 @@ import {Product} from "../classes/product";
 import {ProductComponent} from "../components/ProductComponent";
 import {AddProductModal} from "../components/AddProductModal";
 import {Paginator} from "../components/Paginator";
-
+import {ErrorComponent} from "../components/ErrorComponent";
 export function Products() {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
     const [toggleView, setToggleView] = useState('row');
     const [showAddPopup, setShowAddPopup] = useState(false)
     const [currentPage, setCurrentPage] = useState(1);
@@ -52,6 +53,10 @@ export function Products() {
             res => {
                 setProducts(res.data)
                 setLoading(false);
+            },
+            error => {
+                setLoading(false);
+                setError(true);
             }
         );
 
@@ -62,6 +67,8 @@ export function Products() {
 
 
     if (loading) return <Spinner/>;
+
+    if (error) return <ErrorComponent/>
 
     return (
         <>
@@ -78,7 +85,7 @@ export function Products() {
                     </div>
                 </div>
                 <section className={'products ' + toggleView}>
-                    {currentProducts.map((p) => <ProductComponent key={p.id} onDeleteProduct={getProducts}
+                    {currentProducts.map((p) => <ProductComponent key={p.id} onDeleteProduct={getProducts} onAddReview={getProducts}
                                                                   product={p}/>)}
                     <Paginator
                         itemPerPage={productsPerPage}
