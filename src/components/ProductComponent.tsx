@@ -41,6 +41,10 @@ export function ProductComponent({product, onDeleteProduct, onAddReview}) {
             <h3>{product.data.title}</h3>
             <div className={'card-body'}>
                 <label>
+                    Cateogry:
+                </label>
+                <p className={'category'}>{product.data.category}</p>
+                <label>
                     Description:
                 </label>
                 <p className={'description'}>{product.data.description}</p>

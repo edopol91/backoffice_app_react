@@ -86,7 +86,7 @@ a.active {
     display: flex;
     gap: 1rem;
     justify-content: flex-end;
-    position: absolute;
+    width: 100%;
     bottom: 1rem;
     right: 1rem;
   }

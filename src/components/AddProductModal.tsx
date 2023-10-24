@@ -12,6 +12,7 @@ export function AddProductModal({showAddModal, hideAddModal, submitProduct}) {
 
     function addProduct(values: ProductData) {
         setLoading(true)
+        values.reviews = [values.reviews];
         API.post(`/stores/ijpxNJLM732vm8AeajMR/products`, values).then(
             () => {
                 hideModal();
@@ -28,6 +29,7 @@ export function AddProductModal({showAddModal, hideAddModal, submitProduct}) {
         title: yup.string().required(),
         employee: yup.string().required(),
         price: yup.number().required(),
+        review: yup.string()
     })
 
     function hideModal() {
@@ -47,6 +49,7 @@ export function AddProductModal({showAddModal, hideAddModal, submitProduct}) {
                         title: '',
                         employee: '',
                         price: 0,
+                        reviews: []
                     }}
                     validationSchema={productSchema}
                     onSubmit={values => {
@@ -77,6 +80,10 @@ export function AddProductModal({showAddModal, hideAddModal, submitProduct}) {
                             <div className={'form-container'}>
                                 <label>Employee</label>
                                 <Field name={'employee'} className={'form-field'}/>
+                            </div>
+                            <div className={'form-container'}>
+                                <label>Review</label>
+                                <Field name={'reviews'} className={'form-field'}/>
                             </div>
                             <div className={'button-container'}>
                                 <button className={'btn btn-secondary'} type={"button"} onClick={() => {
