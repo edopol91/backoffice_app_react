@@ -4,12 +4,10 @@ import {Popup} from "./Popup";
 import React, {useState} from "react";
 import API from "../api";
 import {ReviewModal} from "./ReviewModal";
-import {Product} from "../classes/product";
 
 export function ProductComponent({product, onDeleteProduct, onAddReview}) {
     const [showDeletePopup, setShowDeletePopup] = useState(false)
     const [showReviewPopup, setShowReviewPopup] = useState(false)
-    const [newReview, setNewReview] = useState('')
 
 
     function showDeletePopupModal() {
@@ -26,22 +24,6 @@ export function ProductComponent({product, onDeleteProduct, onAddReview}) {
 
     function hideReviewPopup() {
         setShowReviewPopup(false);
-    }
-
-    function addReview(product: Product, newReview: string) {
-        if (newReview !== '') {
-            product.data.reviews ? product.data.reviews.push(newReview) : product.data.reviews = [newReview];
-            product.data.price = Number(product.data.price);
-            API.post(`/stores/ijpxNJLM732vm8AeajMR/products`, product).then(
-                () => {
-                    onAddReview(true)
-                }
-            )
-        }
-    }
-
-    function getNewReview(review: string) {
-        setNewReview(review);
     }
 
 
@@ -95,13 +77,10 @@ export function ProductComponent({product, onDeleteProduct, onAddReview}) {
             <Popup
                 show={showReviewPopup}>
                 <ReviewModal
-                    newReview={getNewReview}
                     product={product}/>
                 <div className={'button-container'}>
                     <button className={'btn btn-secondary'} type="button" onClick={hideReviewPopup}>
                         Close
-                    </button>
-                    <button className={'btn btn-primary btn-rounded'} onClick={() => addReview(product, newReview)}>Add
                     </button>
                 </div>
             </Popup>
