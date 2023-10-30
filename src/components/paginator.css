@@ -9,7 +9,7 @@
 .pagination .page-number {
     font-size: 16px;
     font-weight: 600;
-    color: #5252FFFF;
+    color: #0d6efd;
     background: #fff;
     padding: 10px 20px;
     border-radius: 10px;
@@ -19,15 +19,15 @@
 
 .pagination .page-number:hover {
     color: #fff;
-    background: #5252FFFF;
+    background: #0d6efd;
 }
 
 .pagination .active {
     color: #fff;
-    background: #5252FFFF;
+    background: #0d6efd;
 }
 
 .pagination .active:hover {
-    color: #5252FFFF;
+    color: #0d6efd;
     background: #fff;
 }
