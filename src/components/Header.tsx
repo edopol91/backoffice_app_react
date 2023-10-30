@@ -1,6 +1,6 @@
 import {useNavigate, NavLink} from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faRightFromBracket} from "@fortawesome/free-solid-svg-icons";
+import {faBars, faChartSimple, faRightFromBracket} from "@fortawesome/free-solid-svg-icons";
 export function Header({title}) {
     const navigate = useNavigate();
 
@@ -21,12 +21,12 @@ export function Header({title}) {
                     </li>
                     <li>
                         <NavLink to={"products"}>
-                            Dashboard
+                            <FontAwesomeIcon color={'white'} icon={faBars} />
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to={"chart"}>
-                            Chart
+                            <FontAwesomeIcon color={'white'} icon={faChartSimple} />
                         </NavLink>
                     </li>
                 </ul>

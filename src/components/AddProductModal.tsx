@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import './form.css'
 import API from "../api";
 import {Popup} from "./Popup";
-import {Formik, Form, Field} from 'formik';
+import {Formik, Form, Field, ErrorMessage} from 'formik';
 import * as yup from 'yup'
 import {ProductData} from "../classes/product";
 import Spinner from "./Spinner";
@@ -60,13 +60,12 @@ export function AddProductModal({showAddModal, hideAddModal, submitProduct}) {
                         <Form className={'form'}>
                             <div className={'form-container'}>
                                 <label>Category</label>
+                                <ErrorMessage component={'div'} className={'field-error'} name={'category'}/>
                                 <Field name={'category'} className={'form-field'}/>
-                                {errors.category && touched.category ? (
-                                    <div>{errors.category}</div>
-                                ) : null}
                             </div>
                             <div className={'form-container'}>
                                 <label>Title</label>
+                                <ErrorMessage component={'div'} className={'field-error'} name={'title'}/>
                                 <Field name={'title'} className={'form-field'}/>
                             </div>
                             <div className={'form-container'}>
@@ -75,10 +74,12 @@ export function AddProductModal({showAddModal, hideAddModal, submitProduct}) {
                             </div>
                             <div className={'form-container'}>
                                 <label>Price</label>
+                                <ErrorMessage component={'div'} className={'field-error'} name={'price'}/>
                                 <Field name={'price'} className={'form-field'}/>
                             </div>
                             <div className={'form-container'}>
                                 <label>Employee</label>
+                                <ErrorMessage component={'div'} className={'field-error'} name={'employee'}/>
                                 <Field name={'employee'} className={'form-field'}/>
                             </div>
                             <div className={'form-container'}>
