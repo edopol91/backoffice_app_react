@@ -98,3 +98,13 @@ a.active {
   justify-content: center;
   height: 100%;
 }
+
+.chart-container {
+  padding: 4rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  .chart {
+    width: 75%;
+  }
+}

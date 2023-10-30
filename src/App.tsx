@@ -5,8 +5,8 @@ import {LoginForm} from "./pages/Login";
 import {Dashboard} from "./pages/Dashboard";
 import API from "./api";
 import {TitleProvider} from "./context/titleContext";
-import {Chart} from "./components/Chart";
 import {Products} from "./pages/Products";
+import {ChartPage} from "./components/Chart";
 
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
                   <Route path="login" index element={<LoginForm/>}/>
                   <Route path="dashboard/*" element={<Dashboard/>}>
                       <Route path="products" element={<Products/>}/>
-                      <Route path="chart" element={<Chart/>}/>
+                      <Route path="chart" element={<ChartPage/>}/>
                   </Route>
                   <Route path={'*'} element={<LoginForm/>}></Route>
               </Routes>
